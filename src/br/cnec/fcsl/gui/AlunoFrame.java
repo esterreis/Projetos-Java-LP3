@@ -129,7 +129,7 @@ public class AlunoFrame extends JFrame implements ActionListener, CaretListener 
 
 		table = new TTable<Aluno>(Aluno.class);
 		table.setColumnName("id", "Código");
-		listaAlunos = crud.consulta();
+		listaAlunos = crud.listarAlunos();
 		table.setDados(listaAlunos);
 		table.refresh();
 
@@ -193,7 +193,7 @@ public class AlunoFrame extends JFrame implements ActionListener, CaretListener 
 		AlunoCadastroDialog dialog = new AlunoCadastroDialog();
 		dialog.setVisible(true);
 
-		listaAlunos = crud.consulta();
+		listaAlunos = crud.listarAlunos();
 		table.setDados(listaAlunos);
 		table.refresh();
 
@@ -208,18 +208,29 @@ public class AlunoFrame extends JFrame implements ActionListener, CaretListener 
 
 	protected void do_btnAlterar_actionPerformed(ActionEvent arg0) {
 		Aluno alunoSelecionado = (Aluno) table.getSelecionado();
-		AlunoCadastroDialog dialog = new AlunoCadastroDialog();
-		dialog.setAluno(alunoSelecionado);
-		dialog.setVisible(true);
-		table.refresh();
+		if (alunoSelecionado == null) {
+			JOptionPane.showMessageDialog(null, "Selecione algum item!");
+		} else {
+			AlunoCadastroDialog dialog = new AlunoCadastroDialog();
+			dialog.setAluno(alunoSelecionado);
+			dialog.setVisible(true);
+			table.refresh();
+		}
 	}
 
 	protected void do_btnExcluir_actionPerformed(ActionEvent arg0) throws SQLException {
 		Aluno alunoSelecionado = (Aluno) table.getSelecionado();
-		crud.exclui(alunoSelecionado);
-		listaAlunos = crud.consulta();
-		table.setDados(listaAlunos);
-		table.refresh();
+		if (alunoSelecionado == null) {
+			JOptionPane.showMessageDialog(null, "Selecione algum item!");
+		} else {
+			if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?", "Confirmação",
+					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				crud.exclui(alunoSelecionado);
+				listaAlunos = crud.listarAlunos();
+				table.setDados(listaAlunos);
+				table.refresh();
+			}
+		}
 	}
 
 	public void caretUpdate(CaretEvent e) {

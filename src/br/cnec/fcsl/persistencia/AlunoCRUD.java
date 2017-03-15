@@ -28,7 +28,7 @@ public class AlunoCRUD {
 		conexao.close();
 	}
 	
-	public List<Aluno> consulta() throws SQLException {
+	public List<Aluno> listarAlunos() throws SQLException {
 		conexao = Conexao.conector();
 		
 		List<Aluno> lista = new ArrayList<Aluno>();
