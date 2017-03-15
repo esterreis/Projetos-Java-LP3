@@ -129,7 +129,7 @@ public class AlunoFrame extends JFrame implements ActionListener, CaretListener 
 
 		table = new TTable<Aluno>(Aluno.class);
 		table.setColumnName("id", "Código");
-		listaAlunos = crud.listarAlunos();
+		listaAlunos = crud.listar();
 		table.setDados(listaAlunos);
 		table.refresh();
 
@@ -193,7 +193,7 @@ public class AlunoFrame extends JFrame implements ActionListener, CaretListener 
 		AlunoCadastroDialog dialog = new AlunoCadastroDialog();
 		dialog.setVisible(true);
 
-		listaAlunos = crud.listarAlunos();
+		listaAlunos = crud.listar();
 		table.setDados(listaAlunos);
 		table.refresh();
 
@@ -225,8 +225,8 @@ public class AlunoFrame extends JFrame implements ActionListener, CaretListener 
 		} else {
 			if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?", "Confirmação",
 					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-				crud.exclui(alunoSelecionado);
-				listaAlunos = crud.listarAlunos();
+				crud.excluir(alunoSelecionado);
+				listaAlunos = crud.listar();
 				table.setDados(listaAlunos);
 				table.refresh();
 			}
@@ -248,7 +248,7 @@ public class AlunoFrame extends JFrame implements ActionListener, CaretListener 
 
 	protected void do_campoPesquisa_caretUpdate(CaretEvent e) throws SQLException {
 
-		listaAlunos = crud.pesquisaAvançada(campoPesquisa.getText());
+		listaAlunos = crud.consultar(campoPesquisa.getText());
 		table.setDados(listaAlunos);
 		table.refresh();
 

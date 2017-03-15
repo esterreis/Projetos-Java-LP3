@@ -184,7 +184,7 @@ public class AlunoCadastroDialog extends JDialog implements ActionListener {
 			aluno.setNome(campoNome.getText());
 			aluno.setNota(Double.parseDouble(campoNota.getText()));
 			aluno.setFaltas((Integer) campoFaltas.getValue());
-			crud.atualiza(aluno);
+			crud.atualizar(aluno);
 		}
 
 		dispose();
