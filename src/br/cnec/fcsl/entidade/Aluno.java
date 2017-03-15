@@ -7,11 +7,10 @@ public class Aluno {
 	private Integer faltas;
 
 	public Aluno() {
-		super();
+		
 	}
 
 	public Aluno(Long id, String nome, Double nota, Integer faltas) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.nota = nota;
